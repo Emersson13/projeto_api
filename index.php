@@ -1,5 +1,7 @@
 <?php
-header("Content-type: application/json");// Alterando o cabeçalho do documento para ser um arquivo json
+header("Content-type: application/json");// Alterandoo cabeçalho do documento para ser um arquivo json
+header("Content-Control-Allow-Origin:*");// Estamos permitindo o acesso livre à nossa api.
+
 require_once("vendor/autoload.php");
 //use App\controller\ProdutoController;
 
@@ -36,7 +38,7 @@ require_once("vendor/autoload.php");
                 $resposta = call_user_func_array(array(new $servico, $verboHTTP), $rota);// Estamos instanciando  dinamicamente a classe ProdutoController e informando qual método da classe será executado, passando a variável $verboHTTP, que será get, post, put e delete. A variável $rota, será utilizada para passar o parâmetro para o método da nossa classe, seria algo como delete(1) ou put(1).
 
                 //print_r($resposta);
-                echo json_encode(array('status'=>'sucesso','data'=>$resposta),JSON_UNESCAPED_UNICODE);// JSON_UNSCAPED_UNICODE serve para exibir conteúdo com acentos e caracteres especiais
+                echo json_encode(array('status'=>'sucesso','data'=>$resposta),JSON_UNESCAPED_UNICODE);// JSON_UNESCAPED_UNICODE serve para exibir conteúdo com acentos e caracteres especiais
             } catch (\Exception $erro) {
                 http_response_code(404);
                 echo json_encode(array('status'=>'erro','data'=>$erro->getMessage()));
